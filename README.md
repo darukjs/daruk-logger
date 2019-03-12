@@ -2,12 +2,12 @@
 
 ### 安装
 ```bash
-yarn add @sina/daruk-logger
+yarn add daruk-logger
 ```
 
 ### 使用logger
 ```javascript
-const Logger = require('@sina/daruk-logger').logger
+const Logger = require('daruk-logger').logger
 const prod = process.env.NODE_ENV === 'prod'
 
 const logger = new Logger({ 
@@ -60,7 +60,7 @@ logger.warn('msg')
 有时候，可能需要对 logger 做一次封装，也就是先调用自定义 logger 函数，再在自定义 logger 函数中调用 daruk-logger，这时 daruk-logger 会获取到错误的 fileInfo，解决方式是传递 `options.wrapDepth` 参数：
 
 ```javascript
-const Logger = rquire('@sina/daruk-logger').logger
+const Logger = rquire('daruk-logger').logger
 
 const logger = new Logger({
   // 因为这里封装了一次，所以 wrapDepth 传 1
@@ -77,7 +77,7 @@ const myLogger = {
 需要注意，如果只是覆写 daruk-logger 的方法，不需要传 `options.wrapDepth` 参数：
 
 ```javascript
-const Logger = rquire('@sina/daruk-logger').logger
+const Logger = rquire('daruk-logger').logger
 
 const logger = new Logger()
 const info = logger.info
@@ -109,7 +109,7 @@ logger.info = function (msg) {
 
 ### 使用中间件
 ```javascript
-const loggerMiddleware = require('@sina/daruk-logger').middleware
+const loggerMiddleware = require('daruk-logger').middleware
 
 // 需要在所有中间件之前，使用该中间件，这样才能取到更加准确的响应时间
 server.use(loggerMiddleware({

@@ -1,5 +1,5 @@
 {
-  "name": "@sina/daruk-logger",
+  "name": "daruk-logger",
   "version": "1.9.1",
   "description": "daruk logger",
   "main": "index.js",
