@@ -11,7 +11,7 @@ const Logger = require('@sina/daruk-logger').logger
 const prod = process.env.NODE_ENV === 'prod'
 
 const logger = new Logger({ 
-  // log等级，超过该级别的日志不会输出
+  // log等级，超过该级别的日志不会输出
   level: prod ? 'info' : 'silly',
   // 自定义log等级，
   // 定义后，可以使用logger.customAccess('log')输出日志
@@ -97,7 +97,7 @@ logger.info = function (msg) {
 | options.transports.console | true | 使用consol输出日志 | - | 
 | options.overwriteConsole | false | 是否覆写consol对象上的方法 | - | 
 | options.logExt | {} | 加到日志中的额外信息，可以为一个函数，函数需要返回一个key-value对象 | 比如，添加logType后，每条日志都会添加logType字段 |
-| options.logExt.logType | '' | 必须，每个项目的日志类型，用于在clickhouse中筛选日志 | 不能与其他项目的类型重复，已占用的日志类型：halo_sina_cn、broker、broker-api、logger-server |
+| options.logExt.logType | '' | 必须，每个项目的日志类型，用于在clickhouse中筛选日志 | 不能与其他项目的类型重复，已占用的日志类型：halo_sina_cn、broker、broker-api、logger-server |
 | options.notStringifyLevles | ['access'] | 不对日志的msg进行JSON.stringify的日志等级 | 注意，设置为 notStringifyLevles 后，该等级的日志方法不支持传递多个 msg 参数 |
 | options.disable | false | 禁用日志输出 | - |
 | options.wrapDepth | 0 | 外部的封装深度 | - |
@@ -114,7 +114,7 @@ const loggerMiddleware = require('@sina/daruk-logger').middleware
 // 需要在所有中间件之前，使用该中间件，这样才能取到更加准确的响应时间
 server.use(loggerMiddleware({
   transform (logObj, ctx) {
-    console.log(JSON.stringify(logObj))
+    console.log(JSON.stringify(logObj))
     logger.access(logObj)
   },
   filter (ctx) {
