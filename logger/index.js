@@ -77,7 +77,7 @@ class Logger {
       // 避免 customFileInfo 时，this 仍旧指向父 logger 实例
       // 允许传多个msg
       this[level] = function(...msgs) {
-        this.log(level, msgs);
+        return this.log(level, msgs);
       };
     });
     if (options.overwriteConsole) {
