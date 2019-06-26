@@ -150,7 +150,7 @@ class Logger {
       os_hostname: hostname
     });
     this.logger.log(level, log);
-    return { level, ...logger };
+    return { level, ...log };
   }
   customFileInfo(fileInfo) {
     const cloneLogger = Object.create(this);
