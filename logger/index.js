@@ -99,9 +99,6 @@ class Logger {
     }
   }
   log(level, msgs) {
-    if (this.options.disable) {
-      return;
-    }
     let fileInfo = this.customFileInformation;
     // 输出完整文件信息的条件：
     // 等级为 0 的日志，比如 error 等级的日志
@@ -149,7 +146,9 @@ class Logger {
       msg: resMsg,
       os_hostname: hostname
     });
-    this.logger.log(level, log);
+    if (!this.options.disable) {
+      this.logger.log(level, log);
+    }
     return { level, ...log };
   }
   customFileInfo(fileInfo) {
