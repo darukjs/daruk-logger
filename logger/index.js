@@ -64,7 +64,7 @@ class Logger {
       transports.push(new winston.transports.Console());
     }
     if (options.transports.file) {
-      transports.push(new winston.transports.File({ filename: options.file }));
+      transports.push(new winston.transports.File({ filename: options.transports.file }));
     }
     this.logger = winston.createLogger({
       level: options.level,
