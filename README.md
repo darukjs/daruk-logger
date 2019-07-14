@@ -87,9 +87,9 @@ logger.info = function (msg) {
 
 | 选项 | 默认值 | 描述 | 其他 |
 |----------|----------|----------|----------|
-| options.level | info | log等级，超过该级别的日志不会输出 | 内置的日志等级：{ error: 0, warn: 1, info: 2, access: 2, verbose: 3, debug: 4, silly: 5 } |
+| options.level | info | log等级，log等级，超过该级别的日志不会输出 | 内置的日志等级：{ error: 0, warn: 1, info: 2, access: 2, verbose: 3, debug: 4, silly: 5 } |
 | options.customLevels | {} | 自定义log等级 | 定义后，可以使用logger.levelName('log')输出日志
-| options.transports.file | false | 输出日志文件的路径，如：/var/log/node-app/app.log | 注意，输出日志文件不会自动进行日志文件的切割，建议线上时，根据公司运维场景，决定最终的日志处理方式（保存到文件或者发送的日志中心），[#2](https://github.com/darukjs/daruk-logger/issues/2#issuecomment-511185387) |
+| options.transports.file | '' | 输出日志文件的路径，如：/var/log/node-app/app.log | 注意，日志文件不会自动进行切割，建议线上时，根据公司运维场景，决定最终的日志处理方式（保存到文件或者发送到日志中心），[#2](https://github.com/darukjs/daruk-logger/issues/2#issuecomment-511185387) |
 | options.transports.console | true | 使用console输出日志 | - | 
 | options.overwriteConsole | false | 是否覆写console对象上的方法 | - | 
 | options.logExt | {} | 加到日志中的额外信息，可以为一个函数，函数需要返回一个key-value对象 | 比如，添加 { logType: "app1" } 后，每条日志都会添加 logType 字段 |
@@ -126,7 +126,7 @@ server.use(loggerMiddleware({
 | --- | --- | --- |
 | options.transform | <code>function</code> | 日志通过该函数输出，第一个参数为日志内容对象，第二个参数为koa context |
 | [options.filter] | <code>function</code> | 日志过滤，返回false则过滤该条日志，参数为koa context |
-| [options.requiredLogs] | <code>Array.&lt;string&gt;</code> | 需要输出的日志内容 |
+| [options.requiredLogs] | <code>string[]</code> | 需要输出的日志内容 |
 
 options.requiredLogs默认值为:
 ```JavaScript
