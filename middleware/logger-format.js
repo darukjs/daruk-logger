@@ -1,9 +1,13 @@
-const moment = require('moment')
+const prefixNum = (num) => num > 9 ? `${num}` : `0${num}`
+
+const formatTime = (date) => {
+  return `${date.getFullYear()}-${prefixNum(date.getMonth() + 1)}-${prefixNum(date.getDate())} ${prefixNum(date.getHours())}:${prefixNum(date.getMinutes())}:${prefixNum(date.getSeconds())}`
+}
 
 module.exports = function (ctx, requiredLogs, errorStatusCode) {
   const loggers = {
     'time' () {
-      return '[ ' + moment().format('YYYY-MM-DD HH:mm:ss') + ' ]'
+      return '[ ' + formatTime(new Date()) + ' ]'
     },
     'url' () {
       return ctx.originalUrl
