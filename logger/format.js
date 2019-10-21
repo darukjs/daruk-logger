@@ -2,12 +2,22 @@ const { format } = require('winston')
 const { combine, printf } = format
 const prettyjson = require('prettyjson')
 
-module.exports = function (options) {
+module.exports = function (options, levels) {
   return combine(
     printf((info) => {
       info.timestamp = Date.now()
       const msg = flatObj({}, info)
-      return options.prettyLog ? `${prettyjson.render(msg)}\n${options.separator}` : JSON.stringify(msg)
+
+      const renderOptions = {}
+      // 高亮错误日志
+      if (levels[msg.level] === 0) {
+        renderOptions.keysColor = 'red'
+      } else if (levels[msg.level] === 1) {
+        // 高亮警告日志
+        renderOptions.keysColor = 'yellow'
+      }
+
+      return options.prettyLog ? `${prettyjson.render(msg, renderOptions)}\n${options.separator}` : JSON.stringify(msg)
     })
   )
 }

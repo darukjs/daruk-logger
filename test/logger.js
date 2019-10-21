@@ -1,7 +1,7 @@
 const Logger = require('../logger/index')
 
 const logger = new Logger({
-  prettyLog: false,
+  prettyLog: true,
   customLevels: {
     customLevel: 2
   },

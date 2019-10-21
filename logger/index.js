@@ -51,13 +51,12 @@ class Logger {
     }
     this.options = options;
 
+    const levels = Object.assign(defaultLevels, options.customLevels);
+    this.levels = levels;
     const format =
       typeof options.format === "string"
         ? winston.format[options.format]()
-        : options.format(options);
-
-    const levels = Object.assign(defaultLevels, options.customLevels);
-    this.levels = levels;
+        : options.format(options, levels);
 
     const transports = [];
     if (options.transports.console) {
