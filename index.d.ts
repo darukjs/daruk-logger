@@ -1,10 +1,10 @@
-interface middlewareOptions {
+interface IMiddlewareOptions {
   requiredLogs?: Array<string>;
   transform?: Function;
   filter?: Function;
 }
 
-interface loggerOptions {
+interface ILoggerOptions {
   wrapDepth?: number;
   level?: string;
   customLevels?: object;
@@ -22,19 +22,32 @@ interface loggerOptions {
   notStringifyLevels?: Array<string>;
 }
 
+type logReturns = {
+  level: string;
+  [key:string]: any
+};
+type logFunc = (...msg: Array<string | object>) => logReturns;
+
 declare namespace koaLogger {
-  export function middleware(options: middlewareOptions): Function;
+  export function middleware(options: IMiddlewareOptions): Function;
   export class logger {
-    constructor(options: loggerOptions);
-    options: loggerOptions;
+    constructor(options: ILoggerOptions);
+    options: ILoggerOptions;
     logger: object;
     log: (
       level: string,
       msg: Array<string | object>,
       meta?: object,
       isTop?: boolean
-    ) => any;
-    customFileInfo: (msg: string) => any;
+    ) => logReturns;
+    customFileInfo: (msg: string) => this;
+    error: logFunc;
+    warn: logFunc;
+    info: logFunc;
+    access: logFunc;
+    verbose: logFunc;
+    debug: logFunc;
+    silly: logFunc;
     [key: string]: any;
   }
 }
