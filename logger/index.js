@@ -51,7 +51,7 @@ class Logger {
     }
     this.options = options;
 
-    const levels = Object.assign(defaultLevels, options.customLevels);
+    const levels = Object.assign({},defaultLevels, options.customLevels);
     this.levels = levels;
     const format =
       typeof options.format === "string"
