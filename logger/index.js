@@ -43,7 +43,7 @@ class Logger {
     if (options.notStringifyLevles) {
       options.notStringifyLevels = options.notStringifyLevles;
     }
-    options = Object.assign(defaultConfig, options);
+    options = Object.assign({},defaultConfig, options);
     // access 类型的日志强制不能 stringify
     // 避免外部传递 notStringifyLevels 时，漏掉了 access
     if (options.notStringifyLevels.indexOf("access") < 0) {
